@@ -1,6 +1,6 @@
 #include <cstddef>
 #include <stdexcept>
-#include <iostream> //comment out
+// #include <iostream> 
 #include <string>
 #include "ulliststr.h"
 
@@ -29,18 +29,18 @@ size_t ULListStr::size() const
 // WRITE YOUR CODE HERE
 
 void ULListStr::push_back(const std::string& val) {
-  if (empty()) {
+  if (empty()) {  //case 1: empty list
     head_ = new Item;
     head_->val[0] = val;
     tail_ = head_;
     ++head_->last;
   }
-  else if (tail_->last != ARRSIZE) {
+  else if (tail_->last != ARRSIZE) {  //case 2: tail item has space
     tail_->val[tail_->last] = val;
     ++tail_->last;
   }
   else {
-    Item* temp = new Item;
+    Item* temp = new Item;  //case 3: tail item has no space; create new item and update tail
     tail_->next = temp;
     temp->prev = tail_;
     tail_ = temp;
@@ -51,11 +51,11 @@ void ULListStr::push_back(const std::string& val) {
 }
 
 void ULListStr::pop_back() {
-  if (empty()) return;
-  else if (tail_->last - tail_->first != 1) {
+  if (empty()) return;  //case 1: empty list, nothing to pop
+  else if (tail_->last - tail_->first != 1) { //case 2: tail item has more than 1 item
     --tail_->last;
   }
-  else {
+  else {  //case 3: tail item has 1 item; delete last item and update tail
     tail_ = tail_->prev;
     delete tail_->next;
     tail_->next = NULL;
@@ -64,17 +64,17 @@ void ULListStr::pop_back() {
 }
 
 void ULListStr::push_front(const std::string& val) {
-  if (empty()) {
+  if (empty()) {  //case 1: empty list
     head_ = new Item;
     head_->val[0] = val;
     tail_ = head_;
     ++head_->last;
   }
-  else if (head_->first != 0) {
+  else if (head_->first != 0) { //case 2: head item has space 
     head_->val[head_->first-1] = val;
     --head_->first;
   }
-  else {
+  else {  //case 3: head item has no space; create new item and update head
     Item* temp = new Item;
     head_->prev = temp;
     temp->next = head_;
@@ -87,11 +87,11 @@ void ULListStr::push_front(const std::string& val) {
 }
 
 void ULListStr::pop_front() {
-  if (empty()) return;
-  else if (head_->last - head_->first != 1) {
+  if (empty()) return;  //case 1: empty list, nothing to pop
+  else if (head_->last - head_->first != 1) { //case 2: head item has more than 1 item
     ++head_->first;
   }
-  else {
+  else {  //case 3: head item has 1 item; delete and update head
     head_ = head_->next;
     delete head_->prev;
     head_->prev = NULL;
@@ -108,6 +108,7 @@ std::string const & ULListStr::front() const {
 }
 
 std::string* ULListStr::getValAtLoc(size_t loc) const {
+  /*keep iterating through nodes until you find the node that contains index loc*/
   Item* curr_ = head_;
   while (loc >= curr_->last - curr_->first) {
     loc -= curr_->last - curr_->first;

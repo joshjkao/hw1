@@ -10,11 +10,13 @@ int main(int argc, char* argv[])
   ULListStr test;
   cout << "ARRSIZE = " << ARRSIZE << endl;
 
-  test.pop_back();
+  //popping empty list
+  test.pop_back(); 
   cout << "pop_back on empty list: " << test.size() << endl;
-  test.pop_front();
+  test.pop_front(); 
   cout << "pop_front on empty list " << test.size() << endl;
 
+  //pushing to empty list front
   test.push_front("1");
   test.push_front("2");
   test.push_front("3");
@@ -25,6 +27,7 @@ int main(int argc, char* argv[])
   }
   test.clear();
 
+  //pushing to empty list back
   test.push_back("4");
   test.push_back("5");
   test.push_back("6");
@@ -35,7 +38,7 @@ int main(int argc, char* argv[])
   test.push_back("11");
   test.push_back("12");
   test.push_back("13");
-  test.push_back("14");
+  test.push_back("14"); //creates a new Item
   test.push_back("15");
   
   size = test.size();
@@ -44,7 +47,8 @@ int main(int argc, char* argv[])
     cout << test.get(i) << " ";
   }
 
-  test.push_front("3");
+  //pushing to list front, creates new Item
+  test.push_front("3"); 
   test.push_front("2");
   test.push_front("1");
   cout << endl << "pushing 3 items to front of list: ";
@@ -56,7 +60,7 @@ int main(int argc, char* argv[])
   for (int i = 0; i < 4; i++) {
     test.pop_front();
   }
-  cout << endl << "popping first 4 items: ";
+  cout << endl << "popping first 4 items: ";  //popping front until Item is deleted
   size = test.size();
   for (int i = 0; i < size; i++) {
     cout << test.get(i) << " ";
@@ -65,12 +69,13 @@ int main(int argc, char* argv[])
   for (int i = 0; i < 4; i++) {
     test.pop_back();
   }
-  cout << endl << "popping last 4 items: ";
+  cout << endl << "popping last 4 items: "; //popping back until Item is deleted
   size = test.size();
   for (int i = 0; i < size; i++) {
     cout << test.get(i) << " ";
   }
 
+  //front and back functions
   cout << endl << "front: " << test.front();
   cout << endl << "back: " << test.back() << endl;
 
