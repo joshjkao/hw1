@@ -57,8 +57,10 @@ void ULListStr::pop_back() {
   }
   else {  //case 3: tail item has 1 item; delete last item and update tail
     tail_ = tail_->prev;
-    delete tail_->next;
-    tail_->next = NULL;
+    if (tail_ != NULL) {
+      delete tail_->next;
+      tail_->next = NULL;
+    }
   }
   --size_;
 }
@@ -93,8 +95,10 @@ void ULListStr::pop_front() {
   }
   else {  //case 3: head item has 1 item; delete and update head
     head_ = head_->next;
-    delete head_->prev;
-    head_->prev = NULL;
+    if (head_ != NULL) {
+      delete head_->prev;
+      head_->prev = NULL;
+    }
   }
   --size_;
 }
